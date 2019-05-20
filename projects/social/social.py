@@ -1,4 +1,5 @@
-
+import math
+import random
 
 class User:
     def __init__(self, name):
@@ -30,6 +31,9 @@ class SocialGraph:
         self.users[self.lastID] = User(name)
         self.friendships[self.lastID] = set()
 
+
+    # Time Complexity: O(n^2)
+    # Space Complexity: O(n^2)
     def populateGraph(self, numUsers, avgFriendships):
         """
         Takes a number of users and an average number of friendships
@@ -47,8 +51,29 @@ class SocialGraph:
         # !!!! IMPLEMENT ME
 
         # Add users
+        # Time Complexity: O(n)
+        # Space Complexity: O(n)
+        for i in range(numUsers):
+            self.addUser(f"User {i + 1}")
 
         # Create friendships
+        # avg = totalFriendships / numUsers
+        # totalFriendships = avgFriendships * numUsers
+        # Time Complexity: O(n^2)
+        # Space Complexity: O(n^2)
+        possibleFriendships = []
+        for userID in self.users:
+            for friendID in range(userID + 1, self.lastID + 1):
+                possibleFriendships.append((userID, friendID))
+        # Time Complexity: O(n^2)
+        # Space Complexity: O(1)
+        random.shuffle(possibleFriendships)
+       
+        # Time Complexity: O(n^2)
+        # Space Complexity: O(n^2)
+        for friendship_index in range(avgFriendships * numUsers // 2):
+            friendship = possibleFriendships[friendship_index]
+            self.addFriendship(friendship[0], friendship[1])
 
     def getAllSocialPaths(self, userID):
         """
