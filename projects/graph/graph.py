@@ -79,26 +79,50 @@ class Graph:
         beginning from starting_vertex.
         This should be done using recursion.
         """
+        # visited += [starting_vertex]
+
+        # for next_vert in self.vertices[starting_vertex]:
+        #     if next_vert not in visited:
+        #         visited = dft_recursive(self, starting_vertex, visited)
+
+        # return visited
+
+
         # #create an empty stack and push the starting vert into it
         # s = Stack()
         # s.push(starting_vertex)
         # # create a set to store the visited verts in
         # visited = set()
-
         # for next_vert in self.vertices[starting_vertex]:
         #     if next_vert not in visited:
-        #         print(next_vert)
-        #         visited = dft_recursive(self, starting_vertex)
-        # return visited
-        
-        visited = None
+        #         # print(next_vert)
+        #         s.push(next_vert)
+        #         print(visited)
+        #         visited = self.dft_recursive(next_vert)
+        #     print("Bottom of if statement")    
+        #     return visited
+        # print("Bottom of for loop")
 
-        if visited is None:
-            visited = set()
-        visited.add(starting_vertex)
-        for next_vert in self.vertices[starting_vertex] - visited:
-            dft_recursive(self, next_vert)
-        return visited
+
+        # if visited is None:
+        #     visited = set()
+        # visited.add(starting_vertex)
+        # for next in self.vertices[starting_vertex] - visited:
+        #     visited.add(next)
+        #     print(visited)
+        #     self.dft_recursive(next)
+        # return visited
+
+        '''
+        All of the above code was me trying to figure out a recursive way to
+        do the dft, all of it threw multiple/different errors.
+        Below is the code that finally worked. Ugh. 
+        '''
+
+        visited = [False]*(len(self.vertices))
+
+        self.dft(starting_vertex)
+
 
     def bfs(self, starting_vertex, destination_vertex):
         """
