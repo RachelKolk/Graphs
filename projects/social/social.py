@@ -1,5 +1,6 @@
 import math
 import random
+import time
 
 class Queue():
     def __init__(self):
@@ -30,8 +31,10 @@ class SocialGraph:
         """
         if userID == friendID:
             print("WARNING: You cannot be friends with yourself")
+            # pass
         elif friendID in self.friendships[userID] or userID in self.friendships[friendID]:
             print("WARNING: Friendship already exists")
+            # pass
         else:
             self.friendships[userID].add(friendID)
             self.friendships[friendID].add(userID)
@@ -94,6 +97,27 @@ class SocialGraph:
             friendship = possibleFriendships[friendship_index]
             self.addFriendship(friendship[0], friendship[1])
 
+    # def populateGraphLinear(self, numUsers, avgFriendships):
+    #     self.lastID = 0
+    #     self.users = {}
+    #     self.friendships = {}
+
+    #     for i in range(numUsers):
+    #         self.addUser(f"User {i + 1}")
+
+    #     targetFriendships = (numUsers * avgFriendships) // 2
+    #     totalFriendships = 0
+    #     collisions = 0
+    #     while totalFriendships < targetFriendships:
+    #         userID = random.randint(1, self.lastID)
+    #         friendID = random.randint(1, self.lastID)
+    #         if self.addFriendship(userID, friendID):
+    #             totalFriendships += 2
+    #         else:
+    #             collisions += 1
+    #     print(f"Collisions: {collisions}")
+
+
     def getAllSocialPaths(self, userID):
         """
         Takes a user's userID as an argument
@@ -141,19 +165,31 @@ if __name__ == '__main__':
 
 
     # using this to see how many average users would be in a user's extended network
-    print(len(connections))
-    connections = sg.getAllSocialPaths(1)
-    print(len(connections))
-    connections = sg.getAllSocialPaths(5)
-    print(len(connections))
-    connections = sg.getAllSocialPaths(305)
-    print(len(connections))
-    connections = sg.getAllSocialPaths(276)
-    print(len(connections))
-    connections = sg.getAllSocialPaths(987)
-    print(len(connections))
+    # print(len(connections))
+    # connections = sg.getAllSocialPaths(3)
+    # print(len(connections))
+    # connections = sg.getAllSocialPaths(321)
+    # print(len(connections))
+    # connections = sg.getAllSocialPaths(305)
+    # print(len(connections))
+    # connections = sg.getAllSocialPaths(758)
+    # print(len(connections))
+    # connections = sg.getAllSocialPaths(627)
+    # print(len(connections))
 
-
+# test for linear graph implementation 
+# if __name__ == '__main__':
+# 	sg = SocialGraph()
+# 	numUsers = 100
+# 	avgFriendships = 15
+# 	linear_start_time = time.time()
+# 	sg.populateGraphLinear(numUsers, avgFriendships)
+# 	linear_end_time = time.time()
+# 	print(f"Linear runtime: {linear_end_time - linear_start_time} seconds")
+# 	q_start_time = time.time()
+# 	sg.populateGraph(numUsers, avgFriendships)
+# 	q_end_time = time.time()
+# 	print(f"Quadratic runtime: {q_end_time - q_start_time} seconds")
 
 
 '''
@@ -165,5 +201,12 @@ Part 3 -- Questions:
         because the function creates a bidirectional friendship between the users it
         would be called 1000 / 2 times, or 500.
 
-    2.) If I run the code using 
+    2.) If I run the code using the specifications and choose 5 different user IDs as
+        the arguments for the connections data in an attempt to get an average the percentage
+        changes slightly. But it was never less than a 90% connection rate between a user
+        and all the other people in their extended network they're connected to--
+        the highest I saw was 98%. This seems weird...? 
+        And oddly enough it seems like the whole 7 degrees of seperation is actually a legitimate
+        thing. While I did see some connections that were less, I think the average would
+        be 7, at least for this data set. 
 '''
