@@ -134,9 +134,36 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populateGraph(500, 5)
+    sg.populateGraph(1000, 5)
     print(sg.friendships)
     connections = sg.getAllSocialPaths(1)
     print(connections)
 
 
+    # using this to see how many average users would be in a user's extended network
+    print(len(connections))
+    connections = sg.getAllSocialPaths(1)
+    print(len(connections))
+    connections = sg.getAllSocialPaths(5)
+    print(len(connections))
+    connections = sg.getAllSocialPaths(305)
+    print(len(connections))
+    connections = sg.getAllSocialPaths(276)
+    print(len(connections))
+    connections = sg.getAllSocialPaths(987)
+    print(len(connections))
+
+
+
+
+'''
+Part 3 -- Questions:
+
+    1.) addFriendship() would have to be called 500 times because if the average
+        number of friends is 10 for all 100 users it would have to be called 1 time,
+        per every friendship, which you would assume would be 1000 times (100 * 10), but 
+        because the function creates a bidirectional friendship between the users it
+        would be called 1000 / 2 times, or 500.
+
+    2.) If I run the code using 
+'''
